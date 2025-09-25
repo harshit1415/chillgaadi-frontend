@@ -61,7 +61,8 @@ export const images = {
   feedback_img : require('./images/feedback.png'),
   info_img : require('./images/info.png'),
   
-
+  date_img : require('./images/date.png'),
+  dropdown_img : require('./images/dropdown.png'),
 
 
 

@@ -18,7 +18,9 @@ import AboutReward from '../screens/AboutReward'
 const BottomStack = createBottomTabNavigator()
 function BottomBar() {
 return(
-    <BottomStack.Navigator initialRouteName='Profile' tabBar={props => <CustomTabBar {...props} /> }>
+    <BottomStack.Navigator  screenOptions={{
+    // tabBarHideOnKeyboard: true,
+  }} initialRouteName='Reserve' tabBar={props => <CustomTabBar {...props} /> }>
     <BottomStack.Screen name="Home" component={HomeScreen} options={{headerShown:false}}/>
     <BottomStack.Screen name="Menu" component={MenuScreen} options={{headerShown:false}}/>
     <BottomStack.Screen name="Cart" component={CartScreen} options={{headerShown:false}}/>
