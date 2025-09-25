@@ -55,24 +55,6 @@ const menuData = [
     price: 399
   },
   {
-    id: 4,
-    name: "Pasta Alfredo",
-    image: images.pasta_img,
-    description: "Creamy Alfredo pasta made with parmesan cheese, garlic, and fresh cream.",
-    prepTime: "22 mins",
-    rating: 4.4,
-    price: 279
-  },
-  {
-    id: 5,
-    name: "Tandoori Fish Tikka",
-    image: images.pasta_img,
-    description: "Char-grilled fish marinated with yogurt and Indian spices, served with mint chutney.",
-    prepTime: "28 mins",
-    rating: 4.7,
-    price: 449
-  },
-  {
     id: 6,
     name: "Chocolate Lava Cake",
     image: images.cake_img,
@@ -93,12 +75,16 @@ const menuData = [
       />
       <View style={styles.searchBarViewCss}>
         <View style={styles.searchViewCss}>
-          <Image style={styles.searchImgCss} source={images.search_img} />
+          <Image style={styles.searchImgCss} source={images.search_img}/>
           <TextInput
             placeholder="Searches for dishes ?"
             placeholderTextColor={colors.C000000}
             style={styles.textInputCss}
           />
+        </View>
+        <View style = {{flexDirection:"row",justifyContent:"center",alignItems:"center",borderRadius:ScreenRatio(1),backgroundColor:colors.C08875D,height:ScreenRatio(5),paddingHorizontal:ScreenRatio(1)}}>
+          <Image style = {{height:ScreenRatio(3),width:ScreenRatio(3),resizeMode:"contain",right:2}} source={images.checkout_img}/>
+          <Text style = {{fontFamily:fonts.nunito_Bold , fontSize:RFValue(12),color:colors.CFFFFFF}}>Checkout</Text>
         </View>
       </View>
 
@@ -375,6 +361,7 @@ const styles = StyleSheet.create({
     color: colors.C000000,
     backgroundColor: colors.CFFE4E4,
      paddingVertical:ScreenRatio(.5),
-     paddingHorizontal:ScreenRatio(1)
+     paddingHorizontal:ScreenRatio(1),
+     backgroundColor:colors.CFFE4E4
   },
 });

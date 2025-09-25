@@ -11,15 +11,14 @@ import ReserveScreen from '../screens/ReserveScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import OtpScreen from '../screens/OtpScreen'
 import CustomTabBar from '../components/CustomTabBar'
-import Crousel from '../screens/crousel'
+import RewardScreen from '../screens/RewardScreen'
+import AboutReward from '../screens/AboutReward'
 
 
 const BottomStack = createBottomTabNavigator()
 function BottomBar() {
 return(
-    <BottomStack.Navigator screenOptions={{
-      tabBarActiveTintColor : "red"
-    }} initialRouteName='Menu' tabBar={props => <CustomTabBar {...props} /> }>
+    <BottomStack.Navigator initialRouteName='Profile' tabBar={props => <CustomTabBar {...props} /> }>
     <BottomStack.Screen name="Home" component={HomeScreen} options={{headerShown:false}}/>
     <BottomStack.Screen name="Menu" component={MenuScreen} options={{headerShown:false}}/>
     <BottomStack.Screen name="Cart" component={CartScreen} options={{headerShown:false}}/>
@@ -41,7 +40,9 @@ function Navigation() {
       <Stack.Screen name="SignIn" component={SignInScreen} options={{headerShown:false}}/>
       <Stack.Screen name="BottomBar" component={BottomBar} options={{headerShown:false}}/>
       <Stack.Screen name="VerifyOtp" component={OtpScreen} options={{headerShown:false}}/>
-    <BottomStack.Screen name="Crousel" component={Crousel} options={{headerShown:false}}/>
+      <Stack.Screen name="Reward" component={RewardScreen} options={{headerShown:false}}/>
+      <Stack.Screen name="AboutReward" component={AboutReward} options={{headerShown:false}}/>
+       
         
     </Stack.Navigator>
       </NavigationContainer>

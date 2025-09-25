@@ -12,7 +12,6 @@ import {
   Dimensions,
 } from 'react-native';
 import { fonts } from '../fonts';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '../colors';
 import { images } from '../imagesUrls';
 import {
@@ -22,6 +21,7 @@ import {
   DHeightPercent,
 } from '../utility/screenDimensions';
 import Carousel from 'react-native-reanimated-carousel';
+import LinearGradient from 'react-native-linear-gradient';
 
 const { width } = Dimensions.get('window');
 function HomeScreen(props) {
@@ -66,24 +66,28 @@ function HomeScreen(props) {
   ];
   const todaySpecial = [
     {
+      id: 1,
       image: images.pizza_img,
       item_name: 'Margherita Pizza',
       offer: 'Flat 20% OFF',
       validity: 'valid till midnight',
     },
     {
+      id: 2,
       image: images.burger_img,
       item_name: 'Veggie Burger',
       offer: 'Buy 1 Get 1 Free',
       validity: 'valid till midnight',
     },
     {
+      id: 3,
       image: images.pasta_img,
       item_name: 'Pasta Alfredo',
       offer: 'Special Price ₹249',
       validity: 'valid till midnight',
     },
-     {
+    {
+      id: 4,
       image: images.cake_img,
       item_name: 'ChocoLava Cake',
       offer: 'Special Price ₹349',
@@ -92,128 +96,33 @@ function HomeScreen(props) {
   ];
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.CFFFFFF }}>
-      <StatusBar
+    <View style={{ flex: 1, backgroundColor: colors.CFFFFFF }}>
+       <StatusBar
         translucent
         barStyle="dark-content"
-        backgroundColor={colors.transparent}
+         backgroundColor="rgba(255, 255, 255, .4)"
       />
-      <ScrollView stickyHeaderIndices={[2]}>
-        <View style={[styles.headerViewCss]}>
-          <Text style={[styles.titleTxtCss]}>Welcome John Doe</Text>
-          <TouchableOpacity onPress={() => props?.navigation.navigate('Cart')}>
-            <Image source={images.cart_img} style={styles.leftArrowCss} />
-            {itemLength > 0 && (
-              <View
-                style={{
-                  position: 'absolute',
-                  height: ScreenRatio(2.2),
-                  width: ScreenRatio(2.2),
-                  borderRadius: ScreenRatio(1.1),
-                  backgroundColor: colors.CFF003C,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  alignSelf: 'flex-end',
-                  marginRight: 10,
-                  marginTop: -4,
-                }}
-              >
-                <Text
-                  style={{
-                    fontFamily: fonts.nunito_semibold,
-                    color: colors.CFFFFFF,
-                    fontSize: RFValue(8),
-                  }}
-                >
-                  {itemLength < 99 ? itemLength : '99+'}
-                </Text>
-              </View>
-            )}
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            paddingLeft: ScreenRatio(2),
-          }}
-        >
-          <Text
-            style={{
-              fontFamily: fonts.nunito_Bold,
-              fontSize: RFValue(12),
-              color: colors.C132235,
-            }}
-          >
-            Ready to order something delicious{' '}
-          </Text>
-          <Image
-            source={images.drooling_img}
-            style={{
-              height: ScreenRatio(4),
-              width: ScreenRatio(4),
-              resizeMode: 'contain',
-            }}
-          />
-        </View>
-
-        <View style={styles.searchBarViewCss}>
-          <View style={styles.searchViewCss}>
-            <Image style={styles.searchImgCss} source={images.search_img} />
-            <TextInput
-              placeholder="What are you looking for?"
-              placeholderTextColor={colors.C000000}
-              style={styles.textInputCss}
-            />
-          </View>
-        </View>
-        {/* <FlatList
-          contentContainerStyle={{
-            paddingHorizontal: ScreenRatio(1.5),
-            gap: ScreenRatio(1.5),
-            marginVertical: ScreenRatio(3),
-          }}
-          horizontal
-          data={image}
-          snapToInterval={ScreenRatio(1.5) + DWidthPercent(85)}
-          renderItem={({ item }) => {
-            return (
-              <View
-                style={{ height: ScreenRatio(20), width: DWidthPercent(85) }}
-              >
-                <Image
-                  source={item}
-                  style={{
-                    width: '100%',
-                    height: ScreenRatio(20),
-                    resizeMode: 'cover',
-                    borderRadius: ScreenRatio(2),
-                  }}
-                />
-              </View>
-            );
-          }}
-        /> */}
-
-        <Carousel
+      <ScrollView contentContainerStyle={{ paddingBottom: ScreenRatio(5) }}>
+        <View style = {{backgroundColor:colors.CFFAF70}}>
+          <Carousel
           defaultIndex={4}
-          //  loop = {true}
+          loop={true}
           width={width}
-          height={DHeightPercent(33)}
-          // autoPlay={true}
+          height={DHeightPercent(45)}
+          autoPlay={true}
           data={crouselData}
-          mode="parallax"
-          style={{ marginBottom: ScreenRatio(2) }}
+          mode={'horizontal-stack'}
+          style={{borderRadius:ScreenRatio(3) }}
           modeConfig={{
             parallaxScrollingScale: 1,
             parallaxScrollingOffset: 50,
-            parallaxAdjacentItemScale: .8
+            parallaxAdjacentItemScale: 1,
           }}
           scrollAnimationDuration={1000}
           renderItem={({ item }) => (
             <View
               style={{
-                width: DWidthPercent(90),
+                width: DWidthPercent(100),
                 backgroundColor: colors.CFFFFFF,
                 borderRadius: ScreenRatio(1.25),
                 elevation: 6,
@@ -224,7 +133,7 @@ function HomeScreen(props) {
               <Image
                 source={item.image}
                 style={{
-                  height: DHeightPercent(25),
+                  height: '100%',
                   width: '100%',
                   resizeMode: 'cover',
                   overflow: 'hidden',
@@ -258,13 +167,113 @@ function HomeScreen(props) {
             </View>
           )}
         />
+        </View>
+
+        <LinearGradient
+          colors={[colors.CFFAF70, colors.CFF5963]}
+          style={[
+            {
+              padding:ScreenRatio(2),
+              marginBottom: ScreenRatio(2),
+              borderBottomLeftRadius:ScreenRatio(4),
+              borderBottomRightRadius:ScreenRatio(4)
+            },
+          ]}
+        >
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}
+          >
+            <Text
+              style={{
+                fontFamily: fonts.jakarta_semibold,
+                fontSize: RFValue(15),
+                color: colors.CFFFFFF,
+              }}
+            >
+              Harshit Sharma
+            </Text>
+            <TouchableOpacity
+              onPress={() => props?.navigation.navigate('Reward')}
+            >
+              <Image
+                style={{
+                  height: ScreenRatio(3.5),
+                  width: ScreenRatio(3.5),
+                  resizeMode: 'contain',
+                  
+                }}
+                source={images.left_drop_img}
+              />
+            </TouchableOpacity>
+          </View>
+
+          <View style={{ flexDirection: 'row', alignItems: 'center' ,  marginVertical: ScreenRatio(1),}}>
+            <Text
+              style={{
+                fontFamily: fonts.nunito_Bold,
+                fontSize: ScreenRatio(5),
+                color: colors.CFFFFFF,
+              }}
+            >
+              0
+            </Text>
+            <Text
+              style={{
+                fontFamily: fonts.jakarta_semibold,
+                fontSize: RFValue(14),
+                color: colors.CFFFFFF,
+                marginLeft: ScreenRatio(1),
+              }}
+            >
+              Reward{'\n'}Points
+            </Text>
+          </View>
+
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              backgroundColor : colors.CFFFFFF,
+              paddingHorizontal:ScreenRatio(1),
+              paddingVertical :ScreenRatio(.5),
+              borderRadius:ScreenRatio(3)
+            }}
+          >
+            <Image
+              style={{
+                height: ScreenRatio(4),
+                width: ScreenRatio(9),
+                resizeMode: 'contain',
+                left:5
+              }}
+              source={images.logo_img}
+            />
+            <TouchableOpacity
+              onPress={() => props?.navigation.navigate('AboutReward')}
+            >
+              <Image
+                style={{
+                  height: ScreenRatio(3),
+                  width: ScreenRatio(3),
+                  resizeMode: 'contain',
+                    tintColor : colors.CFFA600
+                }}
+                source={images.detail_img}
+              />
+            </TouchableOpacity>
+          </View>
+        </LinearGradient>
 
         <View
           style={[
             styles.boxCss,
             {
-              marginHorizontal: ScreenRatio(2),
-              marginBottom: ScreenRatio(2),
+              margin: ScreenRatio(2),
               backgroundColor: colors.CFFFFFF,
             },
           ]}
@@ -274,58 +283,76 @@ function HomeScreen(props) {
             <Text style={styles.cardTitleTxtCss}>Today's Special</Text>
           </View>
           <FlatList
-           numColumns={2}
-          contentContainerStyle = {{paddingBottom:ScreenRatio(2)}}
+            scrollEnabled={false}
+            numColumns={2}
+            columnWrapperStyle={{ justifyContent: 'space-between' }}
+            contentContainerStyle={{ paddingBottom: ScreenRatio(2) }}
             data={todaySpecial}
-            key={(_, index) => index.toString()}
+            keyExtractor={todaySpecial => todaySpecial.id.toString()}
             renderItem={({ item }) => {
               return (
                 <TouchableOpacity
                   style={[
                     styles.elevationCss,
                     {
-                      // flexDirection: 'row',
-                      width:DWidthPercent(42),
+                      width: DWidthPercent(42),
                       alignItems: 'center',
                       marginTop: ScreenRatio(1.5),
-                      marginRight:ScreenRatio(1.25),
                       backgroundColor: colors.CFFFFFF,
                       padding: ScreenRatio(1),
                       borderRadius: ScreenRatio(2),
                       borderColor: colors.CE1E6EF,
-                      borderWidth:1,
-                      
+                      borderWidth: 1,
                     },
                   ]}
                 >
                   <Image
                     style={[
-                      styles.imgCss,
                       {
                         height: ScreenRatio(16),
-                        width: "100%",
-                        borderRadius: ScreenRatio(3),
+                        width: '100%',
+                        borderRadius: ScreenRatio(1.5),
                         resizeMode: 'cover',
                       },
                     ]}
                     source={item.image}
                   />
-                  <View style = {{alignItems:"center"}}>
-                      <Text
+                  <View
+                    style={{
+                      alignItems: 'center',
+                      marginTop: ScreenRatio(-2.5),
+                    }}
+                  >
+                    <Text
                       style={[
                         styles.reOdrBtnCss,
                         {
                           backgroundColor: colors.CFFA600,
                           fontFamily: fonts.nunito_Bold,
-                          fontSize: RFValue(11),
-                          color:colors.CFFFFFF
+                          fontSize: RFValue(10),
+                          color: colors.CFFFFFF,
                         },
                       ]}
                     >
                       {item.offer}
                     </Text>
-                    <Text style={styles.text1Css}>{item.item_name}</Text>
-                    <Text style={[styles.text2Css, { marginBottom: 4 }]}>
+                    <Text
+                      style={{
+                        fontFamily: fonts.poppins_medium,
+                        fontSize: RFValue(11),
+                        color: colors.C132235,
+                      }}
+                    >
+                      {item.item_name}
+                    </Text>
+                    <Text
+                      style={{
+                        fontFamily: fonts.poppins_regular,
+                        fontSize: RFValue(10),
+                        color: colors.C132235,
+                        top: -2,
+                      }}
+                    >
                       {item.validity}
                     </Text>
                   </View>
@@ -349,8 +376,9 @@ function HomeScreen(props) {
             <Text style={styles.cardTitleTxtCss}>Recent Orders</Text>
           </View>
           <FlatList
+            scrollEnabled={false}
             data={recentOrders}
-            key={(_, index) => index.toString()}
+            keyExtractor={(_, index) => index.toString()}
             renderItem={({ item }) => {
               return (
                 <View style={styles.cardViewCss}>
@@ -366,7 +394,7 @@ function HomeScreen(props) {
             }}
           />
         </View>
-        <View
+        {/* <View
           style={[
             styles.boxCss,
             {
@@ -374,7 +402,7 @@ function HomeScreen(props) {
               flexDirection: 'row',
               alignItems: 'center',
             },
-            styles.elevationCss
+            styles.elevationCss,
           ]}
         >
           <Image
@@ -406,9 +434,9 @@ function HomeScreen(props) {
               <Text style={styles.reOdrTxtCss}>View Rewards</Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </View> */}
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -520,7 +548,7 @@ const styles = StyleSheet.create({
     borderRadius: ScreenRatio(1.2),
     paddingVertical: ScreenRatio(0.4),
     paddingHorizontal: ScreenRatio(1),
-    backgroundColor: colors.C08875D,
+    backgroundColor: colors.CFFA600,
   },
   reOdrTxtCss: {
     fontFamily: fonts.nunito_semibold,
@@ -529,14 +557,14 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
   elevationCss: {
-shadowColor: "#000",
-shadowOffset: {
-	width: 0,
-	height: 2,
-},
-shadowOpacity: 0.23,
-shadowRadius: 2.62,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
 
-elevation: 4,
-  }
+    elevation: 4,
+  },
 });
