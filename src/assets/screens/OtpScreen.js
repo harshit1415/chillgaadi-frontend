@@ -52,7 +52,7 @@ function OtpScreen(props) {
         isTitle={true}
         title="Verification"
         isRightImage={false}
-        onPress1={() => props?.navigation.navigate('Login')}
+        onPress1={() => {props?.navigation.navigate(previousRouteName === "Login" ? 'Login' : "SignIn")}}
       />
       <View style={{ marginHorizontal: ScreenRatio(2) }}>
         <Text

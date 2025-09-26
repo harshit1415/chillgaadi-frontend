@@ -15,4 +15,5 @@ export const colors = {
   CFFAF70 : "#FFAF70",
   CFF5963 : "#FF5963",
    CFFE4E4:"#FFE4E4",
+   CD0F0C0 : "#D0F0C0"
 };

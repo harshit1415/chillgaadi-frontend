@@ -21,7 +21,7 @@ export default CommonButton;
 
 const styles = StyleSheet.create({
   buttonViewCss: {
-    backgroundColor: colors.C266141,
+    backgroundColor: colors.CFFA600,
     borderRadius: ScreenRatio(1.5),
     paddingVertical: ScreenRatio(1.25),
   },

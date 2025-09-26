@@ -24,15 +24,15 @@ import {
 import CommonButton from '../components/CommonButton';
 import DatePicker from 'react-native-date-picker';
 function ReserveScreen(props) {
-  const [showdatePicker , setShowDatePicker] = useState(false)
-  const [isDate,setIsDate] = useState(new Date()) 
-  const [displayDate , setDisplayDate] = useState(false)
+  const [showdatePicker, setShowDatePicker] = useState(false);
+  const [isDate, setIsDate] = useState(new Date());
+  const [displayDate, setDisplayDate] = useState(false);
 
-    const handleConfirmDate = date => {
-    setShowDatePicker(false);
-    setIsDate(date);
-    setDisplayDate(true);
-  };
+  const upcomingReservation = [
+    { date: '1/10/25', time: '7:00 PM', people: '8', table_no: 15 },
+    { date: '1/10/25', time: '7:00 PM', people: '8', table_no: 15 },
+    { date: '1/10/25', time: '7:00 PM', people: '8', table_no: 15 },
+  ];
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.Ceff7f6 }}>
       <StatusBar
@@ -48,10 +48,10 @@ function ReserveScreen(props) {
         left_arrow_img={images.left_arrow}
         isTitle={true}
         title="Table Reservation"
-        onPress1={() => props?.navigation.navigate('BottomBar')}
+        onPress1={() => props?.navigation.navigate('Home')}
       />
-      {/* <Text>Book your perfect dining experience</Text> */}
-      <View style={styles.boxCss}>
+   <ScrollView>
+     <View style={styles.boxCss}>
         <View style={[styles.flexGapCss, { marginTop: ScreenRatio(0) }]}>
           <Image
             style={{
@@ -82,32 +82,60 @@ function ReserveScreen(props) {
       <KeyboardAvoidingView
         style={[styles.boxCss, { marginVertical: ScreenRatio(2) }]}
       >
-        <Text style={[styles.txtCss,{marginBottom:ScreenRatio(1.5)}]}>Make a Reservation</Text>
+        <Text style={[styles.txtCss, { marginBottom: ScreenRatio(1.5) }]}>
+          Make a Reservation
+        </Text>
         <Text style={styles.txtCss}>Select Date</Text>
-        <TouchableOpacity onPress={()=>setShowDatePicker(true)} style={[styles.inputViewCss, styles.flexCss]}>
+        <TouchableOpacity
+          onPress={() => setShowDatePicker(true)}
+          style={[styles.inputViewCss, styles.flexCss]}
+        >
           <Image style={styles.editImg} source={images.date_img} />
-    
+
           <Text style={[styles.txtCss, { marginLeft: ScreenRatio(0.5) }]}>
-           {displayDate ? `${isDate.getDate()}/${isDate.getMonth() + 1}/${isDate.getFullYear()}` : "Select a date"} 
+            {displayDate
+              ? `${isDate.getDate()}/${
+                  isDate.getMonth() + 1
+                }/${isDate.getFullYear()}`
+              : 'Select a date'}
           </Text>
         </TouchableOpacity>
-         <View style = {[styles.flexCss,{gap:ScreenRatio(2),marginVertical:ScreenRatio(1)}]}>
-          <View style = {{flex:1}}>
-            <Text style = {styles.txtCss}>Time</Text>
-            <TouchableOpacity style = {[styles.inputViewCss,styles.flexCss,{justifyContent:"space-between"}]}>
-              <Text style = {styles.txtCss}>Select Time</Text>
-              <Image source={images.dropdown_img} style = {[styles.editImg ]}/>
+        <View
+          style={[
+            styles.flexCss,
+            { gap: ScreenRatio(2), marginVertical: ScreenRatio(1) },
+          ]}
+        >
+          <View style={{ flex: 1 }}>
+            <Text style={styles.txtCss}>Time</Text>
+            <TouchableOpacity
+              style={[
+                styles.inputViewCss,
+                styles.flexCss,
+                { justifyContent: 'space-between' },
+              ]}
+            >
+              <Text style={styles.txtCss}>Select Time</Text>
+              <Image source={images.dropdown_img} style={[styles.editImg]} />
             </TouchableOpacity>
           </View>
-            <View style = {{flex:1}}>
-            <Text style = {styles.txtCss}>Party Size</Text>
-            <TouchableOpacity style = {[styles.inputViewCss,styles.flexCss,{justifyContent:"space-between"}]}>
-              <Text style = {styles.txtCss}>Guests</Text>
-              <Image source={images.dropdown_img} style = {[styles.editImg]}/>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.txtCss}>Party Size</Text>
+            <TouchableOpacity
+              style={[
+                styles.inputViewCss,
+                styles.flexCss,
+                { justifyContent: 'space-between' },
+              ]}
+            >
+              <Text style={styles.txtCss}>Guests</Text>
+              <Image source={images.dropdown_img} style={[styles.editImg]} />
             </TouchableOpacity>
           </View>
-         </View>
-        <Text style={[styles.txtCss,{marginBottom:ScreenRatio(.5)}]}>Contact Information</Text>
+        </View>
+        <Text style={[styles.txtCss, { marginBottom: ScreenRatio(0.5) }]}>
+          Contact Information
+        </Text>
         <Text style={styles.txtCss}>Full Name</Text>
         <TextInput
           placeholder="John Doe"
@@ -127,8 +155,7 @@ function ReserveScreen(props) {
           style={[styles.lightTxtCss, styles.inputViewCss]}
         />
         <Text style={styles.txtCss}>Special Requests (Optional)</Text>
-        <TextInput
-          numberOfLines={2}
+        <TextInput          
           placeholder="Anniversary,celebrations..."
           placeholderTextColor={colors.C364B63}
           style={[styles.lightTxtCss, styles.inputViewCss]}
@@ -145,7 +172,13 @@ function ReserveScreen(props) {
 
       <View style={styles.boxCss}>
         <Text style={styles.txtCss}>Upcoming Reservations</Text>
-        <View style={{ marginTop: ScreenRatio(1) }}>
+       <FlatList
+         scrollEnabled = {false}
+       data = {upcomingReservation}
+       keyExtractor={(_,index)=>index.toString()}
+       renderItem={({item})=>{
+        return(
+           <View style={{ marginTop: ScreenRatio(1) }}>
           <Text
             style={[
               styles.txtCss,
@@ -155,17 +188,17 @@ function ReserveScreen(props) {
               },
             ]}
           >
-            10/25/2025
+         {item.date}
           </Text>
           <View style={[styles.flexCss]}>
             <Text
               numberOfLines={2}
               style={[styles.lightTxtCss, { flex: 1 }]}
-            >{`${'8:00 PM'}+${'6 guests'}+${'Table No.15'}`}</Text>
+            >{`${item.time}+${`${item.people} guests`}+${`Table No.${item.table_no}`}`}</Text>
             <TouchableOpacity>
               <Text
                 style={[
-                  styles.txtCss,
+                  styles.lightTxtCss,
                   styles.btnViewCss,
                   { marginHorizontal: ScreenRatio(1.5) },
                 ]}
@@ -176,7 +209,7 @@ function ReserveScreen(props) {
             <TouchableOpacity>
               <Text
                 style={[
-                  styles.txtCss,
+                  styles.lightTxtCss,
                   styles.btnViewCss,
                   { backgroundColor: colors.CFFA600 },
                 ]}
@@ -186,7 +219,67 @@ function ReserveScreen(props) {
             </TouchableOpacity>
           </View>
         </View>
+        )
+       }}
+       />
+
       </View>
+
+        <View style={[styles.boxCss,{marginVertical:ScreenRatio(2)}]}>
+        <Text style={styles.txtCss}>Recent Reservations</Text>
+       <FlatList
+       scrollEnabled = {false}
+       data = {upcomingReservation}
+       keyExtractor={(_,index)=>index.toString()}
+       renderItem={({item})=>{
+        return(
+           <View style={{ marginTop: ScreenRatio(1) }}>
+          <Text
+            style={[
+              styles.txtCss,
+              {
+                marginBottom: ScreenRatio(0.25),
+                fontFamily: fonts.nunito_Bold,
+              },
+            ]}
+          >
+         {item.date}
+          </Text>
+          <View style={[styles.flexCss]}>
+            <Text
+              numberOfLines={2}
+              style={[styles.lightTxtCss, { flex: 1 }]}
+            >{`${item.time}+${`${item.people} guests`}+${`Table No.${item.table_no}`}`}</Text>
+            <TouchableOpacity>
+              <Text
+                style={[
+                  styles.lightTxtCss,
+                  styles.btnViewCss,
+                  { marginHorizontal: ScreenRatio(1.5) },
+                ]}
+              >
+                Completed
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Text
+                style={[
+                  styles.lightTxtCss,
+                  styles.btnViewCss,
+                  { backgroundColor: colors.CFFA600 },
+                ]}
+              >
+              Book Again
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        )
+       }}
+       />
+
+      </View>
+   </ScrollView>
 
       <DatePicker
         mode="date"
@@ -194,11 +287,13 @@ function ReserveScreen(props) {
         open={showdatePicker}
         date={isDate}
         minimumDate={new Date()}
-        onConfirm={(date)=>{setIsDate(date) , setDisplayDate(true) , setShowDatePicker(false)}}
+        onConfirm={date => {
+          setIsDate(date), setDisplayDate(true), setShowDatePicker(false);
+        }}
         onCancel={() => {
           setShowDatePicker(false);
-          setDisplayDate(false)
-          setIsDate(new Date())
+          setDisplayDate(false);
+          setIsDate(new Date());
         }}
       />
     </SafeAreaView>

@@ -71,7 +71,7 @@ function RewardScreen(props) {
         left_arrow_img={images.left_arrow}
         isTitle={true}
         title="Rewards"
-        onPress1={() => props?.navigation.navigate('Home')}
+        onPress1={() => props?.navigation.navigate('BottomBar')}
       />
 
       <FlatList

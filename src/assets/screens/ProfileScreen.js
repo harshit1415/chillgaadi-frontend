@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
+  Modal,
 } from 'react-native';
 import CommonHeader from '../components/CommonHeader';
 import { colors } from '../colors';
@@ -15,10 +16,15 @@ import { images } from '../imagesUrls';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { fonts } from '../fonts';
 import { RFValue, ScreenRatio } from '../utility/screenDimensions';
-
+import { CommonActions } from '@react-navigation/native';
+import CommonButton from '../components/CommonButton';
 function ProfileScreen(props) {
-  const [toggle, setToggle] = useState("");
+  const [ordertoggle, setOrderToggle] = useState(false);
+  const [promotiontoggle, setPromotionToggle] = useState(false);
+  const [whatsappoggle, setWhatsappToggle] = useState(false);
+
   const [edit, setEdit] = useState(false);
+  const [logoutPopUp , setLogoutPop] = useState(false)
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.Ceff7f6 }}>
@@ -43,7 +49,7 @@ function ProfileScreen(props) {
           onPress1={() => props?.navigation.navigate('Home')}
         />
         <TouchableOpacity
-        onPress={()=>setEdit(!edit)}
+          onPress={() => setEdit(!edit)}
           style={[
             styles.flexCss,
             {
@@ -57,12 +63,18 @@ function ProfileScreen(props) {
           ]}
         >
           <Image source={images.edit_img} style={styles.editImg} />
-          <Text style={styles.editTxtCss}>{edit? "Save" :"Edit"}</Text>
+          <Text style={styles.editTxtCss}>{edit ? 'Save' : 'Edit'}</Text>
         </TouchableOpacity>
       </View>
       <ScrollView contentContainerStyle={{ paddingBottom: ScreenRatio(4) }}>
-        <View style={[styles.boxCss, { marginTop: ScreenRatio(0)}]}>
-          <View style={{ flexDirection: 'row', alignItems: 'center',marginBottom:ScreenRatio(1) }}>
+        <View style={[styles.boxCss, { marginTop: ScreenRatio(0) }]}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginBottom: ScreenRatio(1),
+            }}
+          >
             <View style={styles.viewCss}>
               <Text style={styles.nameTxtCss}>HS</Text>
             </View>
@@ -91,49 +103,51 @@ function ProfileScreen(props) {
             </View>
           </View>
 
-          {edit  ?( <View>
-            <Text style={styles.txtCss}>Full Name</Text>
-            <TextInput
-              placeholder="John Doe"
-              placeholderTextColor={colors.C364B63}
-              style={[styles.lightTxtCss, styles.inputViewCss]}
-            />
-            <Text style={styles.txtCss}>Email</Text>
-            <TextInput
-              placeholder="abc@gmail.com"
-              placeholderTextColor={colors.C364B63}
-              style={[styles.lightTxtCss, styles.inputViewCss]}
-            />
-            <Text style={styles.txtCss}>Phone No.</Text>
-            <TextInput
-              placeholder="123456"
-              placeholderTextColor={colors.C364B63}
-              style={[styles.lightTxtCss, styles.inputViewCss]}
-            />
-            <Text style={styles.txtCss}>Birthday</Text>
-            <TextInput
-              placeholder="25/03/2002"
-              placeholderTextColor={colors.C364B63}
-              style={[styles.lightTxtCss, styles.inputViewCss]}
-            />
-          </View>) : (<View>
-             <View style={styles.flexGapCss}>
-              <Image style={[styles.editImg]} source={images.email_img} />
-              <Text style={styles.txtCss}>sharma.harshit0606@gmail.com</Text>
+          {edit ? (
+            <View>
+              <Text style={styles.txtCss}>Full Name</Text>
+              <TextInput
+                placeholder="John Doe"
+                placeholderTextColor={colors.C364B63}
+                style={[styles.lightTxtCss, styles.inputViewCss]}
+              />
+              <Text style={styles.txtCss}>Email</Text>
+              <TextInput
+                placeholder="abc@gmail.com"
+                placeholderTextColor={colors.C364B63}
+                style={[styles.lightTxtCss, styles.inputViewCss]}
+              />
+              <Text style={styles.txtCss}>Phone No.</Text>
+              <TextInput
+                placeholder="123456"
+                placeholderTextColor={colors.C364B63}
+                style={[styles.lightTxtCss, styles.inputViewCss]}
+              />
+              <Text style={styles.txtCss}>Birthday</Text>
+              <TextInput
+                placeholder="25/03/2002"
+                placeholderTextColor={colors.C364B63}
+                style={[styles.lightTxtCss, styles.inputViewCss]}
+              />
             </View>
+          ) : (
+            <View>
+              <View style={styles.flexGapCss}>
+                <Image style={[styles.editImg]} source={images.email_img} />
+                <Text style={styles.txtCss}>sharma.harshit0606@gmail.com</Text>
+              </View>
 
               <View style={styles.flexGapCss}>
-              <Image style={[styles.editImg]} source={images.phone_img} />
-              <Text style={styles.txtCss}>8619290606</Text>
-            </View>
+                <Image style={[styles.editImg]} source={images.phone_img} />
+                <Text style={styles.txtCss}>8619290606</Text>
+              </View>
 
               <View style={styles.flexGapCss}>
-              <Image style={[styles.editImg]} source={images.birthday_img} />
-              <Text style={styles.txtCss}>25/03/2002</Text>
+                <Image style={[styles.editImg]} source={images.birthday_img} />
+                <Text style={styles.txtCss}>25/03/2002</Text>
+              </View>
             </View>
-           </View>) }
-
-        
+          )}
         </View>
 
         <View style={[styles.boxCss]}>
@@ -154,15 +168,15 @@ function ProfileScreen(props) {
                 Get notified about order status
               </Text>
             </View>
-            <TouchableOpacity onPress={() => setToggle("orderupdates")}>
+            <TouchableOpacity onPress={() => setOrderToggle(!ordertoggle)}>
               <Image
                 style={{
                   height: ScreenRatio(4),
                   width: ScreenRatio(4),
                   resizeMode: 'contain',
-                  tintColor: colors.CFFA600,
+                  tintColor: ordertoggle ? colors.CFFA600 : colors.CE1E6EF,
                 }}
-                source={toggle === "orderupdates" ? images.on_img : images.off_img}
+                source={ordertoggle ? images.on_img : images.off_img}
               />
             </TouchableOpacity>
           </View>
@@ -171,15 +185,17 @@ function ProfileScreen(props) {
               <Text style={styles.txtCss}>Promotions and Deals</Text>
               <Text style={styles.lightTxtCss}>Receive Special offers</Text>
             </View>
-            <TouchableOpacity onPress={() => setToggle("promotions")}>
+            <TouchableOpacity
+              onPress={() => setPromotionToggle(!promotiontoggle)}
+            >
               <Image
                 style={{
                   height: ScreenRatio(4),
                   width: ScreenRatio(4),
                   resizeMode: 'contain',
-                  tintColor: colors.CFFA600,
+                  tintColor: promotiontoggle ? colors.CFFA600 : colors.CE1E6EF,
                 }}
-                source={toggle === "promotions" ? images.on_img : images.off_img}
+                source={promotiontoggle ? images.on_img : images.off_img}
               />
             </TouchableOpacity>
           </View>
@@ -190,15 +206,15 @@ function ProfileScreen(props) {
                 Get greeting messages on whasapp
               </Text>
             </View>
-            <TouchableOpacity onPress={() => setToggle("whatsapp")}>
+            <TouchableOpacity onPress={() => setWhatsappToggle(!whatsappoggle)}>
               <Image
                 style={{
                   height: ScreenRatio(4),
                   width: ScreenRatio(4),
                   resizeMode: 'contain',
-                  tintColor: colors.CFFA600,
+                  tintColor: whatsappoggle ? colors.CFFA600 : colors.CE1E6EF,
                 }}
-                source={toggle === "whatsapp" ? images.on_img : images.off_img}
+                source={whatsappoggle ? images.on_img : images.off_img}
               />
             </TouchableOpacity>
           </View>
@@ -206,6 +222,7 @@ function ProfileScreen(props) {
 
         <View style={[styles.boxCss, { marginTop: ScreenRatio(2) }]}>
           <TouchableOpacity
+          onPress={()=>props?.navigation.navigate("History")}
             style={[
               styles.flexGapCss,
               { marginTop: ScreenRatio(0), gap: ScreenRatio(2) },
@@ -218,38 +235,9 @@ function ProfileScreen(props) {
             </View>
           </TouchableOpacity>
         </View>
-
         <View style={[styles.boxCss, { marginTop: ScreenRatio(1) }]}>
           <TouchableOpacity
-            style={[
-              styles.flexGapCss,
-              { marginTop: ScreenRatio(0), gap: ScreenRatio(2) },
-            ]}
-          >
-            <Image style={styles.editImg} source={images.wallet_img} />
-            <View style={{ flex: 1 }}>
-              <Text style={styles.txtCss}>Payment methods</Text>
-              <Text style={styles.lightTxtCss}>Card and Cash</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-
-        <View style={[styles.boxCss, { marginTop: ScreenRatio(1) }]}>
-          <TouchableOpacity
-            style={[
-              styles.flexGapCss,
-              { marginTop: ScreenRatio(0), gap: ScreenRatio(2) },
-            ]}
-          >
-            <Image style={styles.editImg} source={images.loyalty_img} />
-            <View style={{ flex: 1 }}>
-              <Text style={styles.txtCss}>Loyalty Program</Text>
-              <Text style={styles.lightTxtCss}>Points and Reward</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-        <View style={[styles.boxCss, { marginTop: ScreenRatio(1) }]}>
-          <TouchableOpacity
+          onPress={()=>props?.navigation.navigate("RestaurantInfo")}
             style={[
               styles.flexGapCss,
               { marginTop: ScreenRatio(0), gap: ScreenRatio(2) },
@@ -294,23 +282,10 @@ function ProfileScreen(props) {
           </TouchableOpacity>
         </View>
 
-        <View style={[styles.boxCss, { marginTop: ScreenRatio(1) }]}>
-          <TouchableOpacity
-            style={[
-              styles.flexGapCss,
-              { marginTop: ScreenRatio(0), gap: ScreenRatio(2) },
-            ]}
-          >
-            <Image style={styles.editImg} source={images.setting_img} />
-            <View style={{ flex: 1 }}>
-              <Text style={styles.txtCss}>App Settings</Text>
-              <Text style={styles.lightTxtCss}>Privacy and Preferences</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
 
         <View style={[styles.boxCss, { marginTop: ScreenRatio(1) }]}>
           <TouchableOpacity
+          onPress={()=>setLogoutPop(true)}
             style={[
               styles.flexGapCss,
               { marginTop: ScreenRatio(0), gap: ScreenRatio(2) },
@@ -324,6 +299,45 @@ function ProfileScreen(props) {
           </TouchableOpacity>
         </View>
       </ScrollView>
+
+      <Modal
+        transparent={true}
+        onRequestClose={() => setLogoutPop(false)}
+        animationType="slide"
+        visible={logoutPopUp}
+      >
+        <View style={styles.modelViewCss}>
+          <View style={[styles.logOutViewCss]}>
+            <Text style={{fontFamily:fonts.poppins_medium , fontSize:RFValue(12),color:colors.C132235}}>Log out?</Text>
+            <Text style={{fontFamily:fonts.poppins_medium , fontSize:RFValue(13),color:colors.C132235}}>
+              Are you sure you want to log out from the ChillGaadi .
+            </Text>
+
+          <View style = {{flexDirection:"row",gap:ScreenRatio(2),marginVertical:ScreenRatio(1)}}>
+              <CommonButton
+              text="CANCEL"
+              buttonViewCss={[{ backgroundColor: colors.CFF5963,flex:1}]}
+              onPress={() => {
+                setLogoutPop(false);
+              }}
+            />
+
+            <CommonButton
+              text="LOGOUT"
+              buttonViewCss = {{flex:1}}
+              onPress={() => {
+                props?.navigation.dispatch(
+                  CommonActions.reset({
+                    index: 1,
+                    routes: [{ name: 'Login' }],
+                  }),
+                );
+              }}
+            />
+          </View>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 }
@@ -389,5 +403,28 @@ const styles = StyleSheet.create({
     fontSize: RFValue(10),
     fontFamily: fonts.nunito_regular,
     color: colors.C364B63,
+  },
+  modelViewCss: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,.5)',
+  },
+  logOutViewCss: {
+    padding: ScreenRatio(2),
+    elevation: 5,
+    backgroundColor: colors.CFFFFFF,
+    borderRadius: ScreenRatio(3),
+    borderRadius: ScreenRatio(3),
+  },
+    elevationCss: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+
+    elevation: 4,
   },
 });

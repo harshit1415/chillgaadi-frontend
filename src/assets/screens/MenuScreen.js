@@ -67,7 +67,7 @@ const menuData = [
 
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.CFFFFFF }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: colors.Ceff7f6 }}>
       <StatusBar
         translucent
         barStyle="dark-content"
@@ -82,10 +82,10 @@ const menuData = [
             style={styles.textInputCss}
           />
         </View>
-        <View style = {{flexDirection:"row",justifyContent:"center",alignItems:"center",borderRadius:ScreenRatio(1),backgroundColor:colors.C08875D,height:ScreenRatio(5),paddingHorizontal:ScreenRatio(1)}}>
+        {/* <View style = {{flexDirection:"row",justifyContent:"center",alignItems:"center",borderRadius:ScreenRatio(1),backgroundColor:colors.C08875D,height:ScreenRatio(5),paddingHorizontal:ScreenRatio(1)}}>
           <Image style = {{height:ScreenRatio(3),width:ScreenRatio(3),resizeMode:"contain",right:2}} source={images.checkout_img}/>
           <Text style = {{fontFamily:fonts.nunito_Bold , fontSize:RFValue(12),color:colors.CFFFFFF}}>Checkout</Text>
-        </View>
+        </View> */}
       </View>
 
       <View style={styles.orderCategoryViewCss}>
@@ -208,7 +208,7 @@ const menuData = [
                           >
                             <Image
                               source={images.subtract_img}
-                              style={styles.subtractIconCss}
+                              style={styles.IconCss}
                             />
                           </TouchableOpacity>
                           <Text style={styles.countTxtCss}>{count}</Text>
@@ -222,7 +222,7 @@ const menuData = [
                           >
                             <Image
                               source={images.add_img}
-                              style={styles.addIconCss}
+                              style={styles.IconCss}
                             />
                           </TouchableOpacity>
                         </View> ):
@@ -236,9 +236,9 @@ const menuData = [
            <View style = {{backgroundColor:"red"}}>
             <Image source={images.red_img} style = {{height:ScreenRatio(2),width:ScreenRatio(2),resizeMode:"contain"}}/>
            </View>
-           <TouchableOpacity onPress={()=>setAddToFavourite(!addToFavourite)}>
+           {/* <TouchableOpacity onPress={()=>setAddToFavourite(!addToFavourite)}>
             <Image source={addToFavourite ? images.active_wishlist :  images.deactive_wishlist} style = {{height:ScreenRatio(3),width:ScreenRatio(3),resizeMode:"contain"}}/>
-           </TouchableOpacity>
+           </TouchableOpacity> */}
          </View>
       </View>
       )
@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: colors.CFFFFFF,
+    backgroundColor: colors.Ceff7f6,
   },
   searchViewCss: {
     flex: 1,
@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
     marginRight: ScreenRatio(1.2),
     borderRadius: ScreenRatio(1),
     height: ScreenRatio(5),
-    // backgroundColor: colors.CE1E6EF,
+     backgroundColor: colors.CFFFFFF,
   },
   searchImgCss: {
     height: ScreenRatio(1.6),
@@ -335,20 +335,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor:colors.CFFA600,
     borderRadius:ScreenRatio(.4),
-    paddingHorizontal:ScreenRatio(.5)
+
   },
-  subtractIconCss: {
+  IconCss: {
     height: ScreenRatio(2),
     width: ScreenRatio(2),
     resizeMode:"contain",
     alignSelf: 'center',
+    paddingHorizontal:ScreenRatio(1.2)
   },
-  addIconCss: {
-    alignSelf: 'center',
-    height: ScreenRatio(2),
-    resizeMode: 'contain',
-    width: ScreenRatio(2),
-  },
+  
   countViewCss: {
     backgroundColor: colors.CFF9B08,
     justifyContent: 'center',
@@ -357,11 +353,11 @@ const styles = StyleSheet.create({
   },
   countTxtCss: {
     fontFamily: fonts.nunito_semibold,
-    fontSize: RFValue(11),
+    fontSize: RFValue(12),
     color: colors.C000000,
     backgroundColor: colors.CFFE4E4,
      paddingVertical:ScreenRatio(.5),
-     paddingHorizontal:ScreenRatio(1),
+     paddingHorizontal:ScreenRatio(1.5),
      backgroundColor:colors.CFFE4E4
   },
 });

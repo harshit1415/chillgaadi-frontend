@@ -63,7 +63,15 @@ export const images = {
   
   date_img : require('./images/date.png'),
   dropdown_img : require('./images/dropdown.png'),
+  delete_img : require('./images/delete.png'),
+  filter_img : require('./images/filter.png'),
 
+  active_circle_img : require('./images/active_circle.png'),
+  inactive_circle_img : require('./images/inactive_circle.png'),
+  cross_img : require('./images/cross.png'),
+  cheel_img : require('./images/cheel.png')
+
+  
 
 
 };

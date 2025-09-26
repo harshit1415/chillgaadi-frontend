@@ -394,47 +394,6 @@ function HomeScreen(props) {
             }}
           />
         </View>
-        {/* <View
-          style={[
-            styles.boxCss,
-            {
-              margin: ScreenRatio(2),
-              flexDirection: 'row',
-              alignItems: 'center',
-            },
-            styles.elevationCss,
-          ]}
-        >
-          <Image
-            source={images.reward_img}
-            style={[
-              styles.imgCss,
-              { height: ScreenRatio(3), width: ScreenRatio(3) },
-            ]}
-          />
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}
-          >
-            <View>
-              <Text style={styles.text1Css}>Loyalty Points</Text>
-              <Text style={styles.text2Css}>
-                You have{' '}
-                <Text style={[styles.text1Css, { color: colors.C000000 }]}>
-                  {'2050'}{' '}
-                </Text>
-                points
-              </Text>
-            </View>
-            <TouchableOpacity style={[styles.reOdrBtnCss]}>
-              <Text style={styles.reOdrTxtCss}>View Rewards</Text>
-            </TouchableOpacity>
-          </View>
-        </View> */}
       </ScrollView>
     </View>
   );
